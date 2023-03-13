@@ -1,5 +1,0 @@
-
-
-fun main() {
-    Bot().startPolling()
-}

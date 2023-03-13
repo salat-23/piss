@@ -1,3 +1,5 @@
+package me.salat23.piss
+
 import api.longpoll.bots.LongPollBot
 import api.longpoll.bots.model.events.messages.MessageNew
 

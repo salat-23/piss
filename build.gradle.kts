@@ -21,3 +21,9 @@ tasks.test {
 kotlin {
     jvmToolchain(17)
 }
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "me.salat23.piss.MainKt"
+    }
+}
