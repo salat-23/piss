@@ -18,10 +18,10 @@ class Bot: LongPollBot() {
     override fun onMessageNew(messageNew: MessageNew?) {
         try {
             if (messageNew?.message?.hasText() == true) {
-                if (messageNew.message.fromId == 255136148) return
                 val text = messageNew.message.text!!
+                if (messageNew.message.fromId == 255136148 && !text.startsWith("!")) return
                 keywords.forEach { word ->
-                    if (text.contains(word)) {
+                    if (text.lowercase().contains(word.lowercase())) {
                         vk.messages.send()
                             .setPeerId(messageNew.message.peerId)
                             .setReplyTo(messageNew.message.id)
