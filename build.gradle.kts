@@ -24,6 +24,6 @@ kotlin {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "me.salat23.piss.Main"
+        attributes["Main-Class"] = "me.salat23.piss.MainKt"
     }
 }
