@@ -7,11 +7,11 @@ import kotlin.random.Random
 
 class Bot() : LongPollBot() {
 
-    private val envToken = System.getenv("PISS_TOKEN")
+    private val env = System.getenv()
     private val dvachTexts: List<String>
 
     init {
-        val path = this.javaClass.getResource("/2ch/")?.file
+        val path = this.javaClass.getResource("2ch/")?.file
         if (path != null) {
             val texts = mutableListOf<String>()
             val file = File(path)
@@ -22,6 +22,7 @@ class Bot() : LongPollBot() {
         } else {
             dvachTexts = listOf()
         }
+        println(env)
     }
     private val keywords = listOf(
         "python",
@@ -33,7 +34,7 @@ class Bot() : LongPollBot() {
         "питончик",
         "питухон"
     )
-    override fun getAccessToken(): String = envToken
+    override fun getAccessToken(): String = env["PISS_TOKEN"] ?: ""
     override fun onMessageNew(messageNew: MessageNew?) {
         try {
             if (messageNew?.message?.hasText() == true) {
