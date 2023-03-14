@@ -29,7 +29,18 @@ class Bot() : LongPollBot() {
     override fun onMessageNew(messageNew: MessageNew?) {
         try {
             if (messageNew?.message?.hasText() == true) {
-                val text = messageNew.message.text!!.replace("[^A-Za-zА-Яа-я]", "")
+                var text = messageNew.message.text!!
+
+                if (text.startsWith("!вывез?")) {
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("Нет, чел не вывез очевидно")
+                        .execute()
+                    return
+                }
+
+                text = text.replace("[^A-Za-zА-Яа-я]", "")
 
                 if (text.startsWith("!2ch") && dvachTexts.isNotEmpty()) {
                     vk.messages.send()
