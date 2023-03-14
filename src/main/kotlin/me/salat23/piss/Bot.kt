@@ -31,6 +31,15 @@ class Bot() : LongPollBot() {
             if (messageNew?.message?.hasText() == true) {
                 var text = messageNew.message.text!!
 
+                if (text.startsWith("!переобулся?")) {
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("100% переобувочная случилась")
+                        .execute()
+                    return
+                }
+
                 if (text.startsWith("!вывез?")) {
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
