@@ -4,4 +4,6 @@ services:
   application:
     build: .
     container_name: pissbot
+    environment:
+      PISS_TOKEN: ${PISS_TOKEN}
     restart: on-failure
