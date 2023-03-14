@@ -31,6 +31,15 @@ class Bot() : LongPollBot() {
             if (messageNew?.message?.hasText() == true) {
                 var text = messageNew.message.text!!
 
+                if (text.startsWith("!я прав?") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("Да, ты абсолютно прав!!!")
+                        .execute()
+                    return
+                }
+                
                 if (text.startsWith("!переобулся?")) {
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
