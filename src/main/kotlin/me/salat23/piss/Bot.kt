@@ -11,11 +11,11 @@ class Bot() : LongPollBot() {
     private val dvachTexts: List<String>
 
     init {
-        val path = this.javaClass.getResource("2ch/")?.file
+        val path = this.javaClass.getResource("/2ch/")?.file
         if (path != null) {
             val texts = mutableListOf<String>()
-            val file = File(path)
-            file.walk().forEach { file ->
+            val files = File(path).listFiles()
+            files.forEach { file ->
                 texts.addAll(file.readText().split("%~%~%"))
             }
             dvachTexts = texts.toList()
