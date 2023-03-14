@@ -13,6 +13,9 @@ class Bot: LongPollBot() {
         "питхон",
         "пэйтон",
         "питончик",
+        "п и т о н",
+        "п и тон",
+        "пи тон",
     )
     override fun getAccessToken(): String {
         return "vk1.a.zhXc_AJrtbl6zOSYLOowWmMTR7PTDBSWkFW4luT-Y2-QCsS6SFvD2JOoQoQxG2SFLDcGl7JgvYaYUprF8O_BG3LF0vuRFtUCttNlh-40ulb40ePWKrEji5agHRHE0TL95PWCbTBt5tzY4xFRD5urOEOpvbJ-ZRxmpsKKzEs-yAlBH8RI72huTJ9lNORAVndGqeuwtB8iW8rjUfZSq6L7wA"
@@ -20,7 +23,7 @@ class Bot: LongPollBot() {
     override fun onMessageNew(messageNew: MessageNew?) {
         try {
             if (messageNew?.message?.hasText() == true) {
-                val text = messageNew.message.text!!
+                val text = messageNew.message.text!!.replaceAll("[^A-Za-zА-Яа-я]", "")
                 if (messageNew.message.fromId == 255136148 && !text.startsWith("!")) return
                 keywords.forEach { word ->
                     if (text.lowercase().contains(word.lowercase())) {
