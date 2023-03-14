@@ -11,18 +11,9 @@ class Bot() : LongPollBot() {
     private val dvachTexts: List<String>
 
     init {
-        val path = this.javaClass.getResource("/2ch/")?.file
-        if (path != null) {
-            val texts = mutableListOf<String>()
-            val files = File(path).listFiles()
-            files.forEach { file ->
-                texts.addAll(file.readText().split("%~%~%"))
-            }
-            dvachTexts = texts.toList()
-        } else {
-            dvachTexts = listOf()
-        }
-        println(env)
+        val path = this.javaClass.getResourceAsStream("/2ch/wpis.txt")
+        dvachTexts = path?.bufferedReader()?.readText()?.split("%~%~%") ?: listOf()
+        println(dvachTexts.size)
     }
     private val keywords = listOf(
         "python",
