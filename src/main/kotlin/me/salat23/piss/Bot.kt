@@ -2,13 +2,13 @@ package me.salat23.piss
 
 import api.longpoll.bots.LongPollBot
 import api.longpoll.bots.model.events.messages.MessageNew
-import java.io.File
 import kotlin.random.Random
 
 class Bot() : LongPollBot() {
 
     private val env = System.getenv()
     private val dvachTexts: List<String>
+    private var isClowning = true
 
     init {
         val path = this.javaClass.getResourceAsStream("/2ch/wpis.txt")
@@ -29,8 +29,8 @@ class Bot() : LongPollBot() {
     override fun onMessageNew(messageNew: MessageNew?) {
         try {
             if (messageNew?.message?.hasText() == true) {
-                if (messageNew.message.fromId == 191342391) {
-                    vk.messages.delete().setConversationMessageIds(messageNew.message.conversationMessageId).setPeerId(messageNew.message.peerId).execute()
+                if (messageNew.message.fromId == 191342391 && isClowning) {
+                    vk.messages.delete().setConversationMessageIds(messageNew.message.conversationMessageId).setDeleteForAll(true).setPeerId(messageNew.message.peerId).execute()
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
                         .setReplyTo(messageNew.message.id)
@@ -46,6 +46,16 @@ class Bot() : LongPollBot() {
                         .setPeerId(messageNew.message.peerId)
                         .setReplyTo(messageNew.message.id)
                         .setMessage("Ну да, тот еще терпильник...")
+                        .execute()
+                    return
+                }
+
+                if (text.startsWith("!clown") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
+                    isClowning = !isClowning
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("Режим клоуна переключен.")
                         .execute()
                     return
                 }
