@@ -40,7 +40,34 @@ class Bot() : LongPollBot() {
                 }
 
                 var text = messageNew.message.text!!
+                
+                if (text.startsWith("!терпила?") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("Ну да, тот еще терпильник...")
+                        .execute()
+                    return
+                }
+                
+                if (text.startsWith("!слит?") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("УУУУ СЛИТ!!!")
+                        .execute()
+                    return
+                }
 
+                if (text.startsWith("!я прав?") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("Да, ты абсолютно прав!!!")
+                        .execute()
+                    return
+                }
+                
                 if (text.startsWith("!переобулся?")) {
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
