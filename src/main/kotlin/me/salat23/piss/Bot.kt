@@ -29,6 +29,16 @@ class Bot() : LongPollBot() {
     override fun onMessageNew(messageNew: MessageNew?) {
         try {
             if (messageNew?.message?.hasText() == true) {
+                if (messageNew.message.fromId == 191342391) {
+                    vk.messages.delete().setMessageIds(messageNew.message.id).setPeerId(messageNew.message.peerId).execute()
+                    vk.messages.send()
+                        .setPeerId(messageNew.message.peerId)
+                        .setReplyTo(messageNew.message.id)
+                        .setMessage("\uD83E\uDD21 написал")
+                        .execute()
+                    return
+                }
+
                 var text = messageNew.message.text!!
 
                 if (text.startsWith("!переобулся?")) {
