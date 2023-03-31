@@ -30,7 +30,7 @@ class Bot() : LongPollBot() {
         try {
             if (messageNew?.message?.hasText() == true) {
                 if (messageNew.message.fromId == 191342391) {
-                    vk.messages.delete().setMessageIds(messageNew.message.id).setPeerId(messageNew.message.peerId).execute()
+                    vk.messages.delete().setConversationMessageIds(messageNew.message.conversationMessageId).setPeerId(messageNew.message.peerId).execute()
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
                         .setReplyTo(messageNew.message.id)
@@ -40,7 +40,7 @@ class Bot() : LongPollBot() {
                 }
 
                 var text = messageNew.message.text!!
-                
+
                 if (text.startsWith("!терпила?") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
@@ -49,7 +49,7 @@ class Bot() : LongPollBot() {
                         .execute()
                     return
                 }
-                
+
                 if (text.startsWith("!слит?") && (messageNew.message.fromId == 255136148 || messageNew.message.fromId == 664582531)) {
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
@@ -67,7 +67,7 @@ class Bot() : LongPollBot() {
                         .execute()
                     return
                 }
-                
+
                 if (text.startsWith("!переобулся?")) {
                     vk.messages.send()
                         .setPeerId(messageNew.message.peerId)
